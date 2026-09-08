@@ -1,330 +1,152 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dellanio Alencar — Engineering Manager</title>
-    <meta name="description"
-        content="Dellanio Alencar — Engineering Manager with expertise in software architecture, cloud, DevOps, and AI across banking, healthcare, and ERP sectors." />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet" />
-    <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f5f5ef">
+    <title>Dellanio Alencar — Liderança de engenharia</title>
+    <meta name="description" content="Dellanio Alencar. Gestão de engenharia e arquitetura de software, com mais de 15 anos de experiência e atuação internacional em bancos, saúde e sistemas corporativos.">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Dellanio Alencar — Liderança de engenharia">
+    <meta property="og:description" content="Engenharia com visão de negócio. Liderança próxima das pessoas.">
+    <meta property="og:url" content="https://dellanio.com/">
+    <meta property="og:image" content="https://dellanio.com/assets/profile.jpg">
+    <meta property="og:image:alt" content="Dellanio Alencar">
+    <meta property="og:locale" content="pt_BR">
+    <link rel="canonical" href="https://dellanio.com/">
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;450;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,450;6..72,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
 </head>
-
 <body>
-
-    <!-- ===== NAV ===== -->
-    <nav class="nav" id="nav">
-        <div class="nav-inner">
-            <a class="nav-logo" href="#hero">Dellanio<span>.</span></a>
-            <div class="nav-links">
-                <a href="#about" data-en="About" data-pt="Sobre">About</a>
-                <a href="#skills" data-en="Skills" data-pt="Skills">Skills</a>
-                <a href="#contact" data-en="Contact" data-pt="Contato">Contact</a>
-            </div>
-            <div class="nav-actions">
-                <button class="lang-toggle" id="langToggle" aria-label="Toggle language">
-                    <span class="lang-active" id="langLabel">EN</span>
-                    <span class="lang-sep">|</span>
-                    <span class="lang-inactive" id="langAlt">PT</span>
+    <a class="skip-link" href="#main" data-pt="Pular para o conteúdo" data-en="Skip to content">Pular para o conteúdo</a>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a class="wordmark" href="#hero" aria-label="Dellanio Alencar">
+                <span class="monogram" aria-hidden="true">da.</span>
+                <span>Dellanio Alencar</span>
+            </a>
+            <nav class="navigation" id="navigation" aria-label="Navegação principal" data-pt-label="Navegação principal" data-en-label="Main navigation">
+                <a href="#about" data-pt="Sobre" data-en="About">Sobre</a>
+                <a href="#experience" data-pt="Experiência" data-en="Experience">Experiência</a>
+                <a href="#skills" data-pt="Atuação" data-en="Expertise">Atuação</a>
+                <a href="#contact" data-pt="Contato" data-en="Contact">Contato</a>
+            </nav>
+            <div class="header-controls">
+                <div class="language-switch" hidden role="group" aria-label="Idioma" data-pt-label="Idioma" data-en-label="Language">
+                    <button type="button" data-language="pt" lang="pt-BR" aria-label="Português" aria-pressed="true">PT</button>
+                    <span aria-hidden="true">/</span>
+                    <button type="button" data-language="en" lang="en" aria-label="English" aria-pressed="false">EN</button>
+                </div>
+                <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="navigation" aria-label="Abrir menu" hidden>
+                    <span></span><span></span>
                 </button>
-                <a href="https://www.linkedin.com/in/dellanio/" target="_blank" class="btn btn-primary"
-                    data-en="LinkedIn" data-pt="LinkedIn">LinkedIn</a>
-            </div>
-            <button class="hamburger" id="hamburger" aria-label="Menu">
-                <span></span><span></span><span></span>
-            </button>
-        </div>
-        <div class="mobile-menu" id="mobileMenu">
-            <a href="#about" data-en="About" data-pt="Sobre">About</a>
-            <a href="#skills" data-en="Skills" data-pt="Skills">Skills</a>
-            <a href="#contact" data-en="Contact" data-pt="Contato">Contact</a>
-            <a href="https://www.linkedin.com/in/dellanio/" target="_blank">LinkedIn</a>
-        </div>
-    </nav>
-
-    <!-- ===== HERO ===== -->
-    <section class="hero" id="hero">
-        <div class="hero-grid">
-            <div class="hero-text fade-in">
-                <div class="hero-badge">
-                    <span class="badge-dot"></span>
-                    <span data-en="Available for new opportunities"
-                        data-pt="Disponível para novas oportunidades">Available for new opportunities</span>
-                </div>
-                <h1>
-                    <span class="hero-greeting" data-en="Hi, I'm" data-pt="Olá, sou">Hi, I'm</span>
-                    <span class="hero-name">Dellanio Alencar</span>
-                </h1>
-                <p class="hero-role" data-en="Engineering Manager" data-pt="Gerente de Engenharia">Engineering Manager
-                </p>
-                <p class="hero-tagline"
-                    data-en="Leading engineering teams and architecture for large-scale systems in banking, healthcare, and fintech — across Brazil, China, Ecuador and Uruguay."
-                    data-pt="Liderando times de engenharia e arquitetura em sistemas de grande porte para bancos, saúde e fintech.">
-                    Leading engineering teams and architecture for large-scale systems in banking, healthcare, and
-                    fintech.
-                </p>
-                <div class="hero-cta">
-                    <a href="https://www.linkedin.com/in/dellanio/" target="_blank" class="btn btn-primary"
-                        data-en="View LinkedIn" data-pt="Ver LinkedIn">View LinkedIn</a>
-                    <a href="#contact" class="btn btn-ghost" data-en="Get in Touch" data-pt="Entrar em Contato">Get in
-                        Touch</a>
-                </div>
-                <div class="hero-stats">
-                    <div class="stat">
-                        <span class="stat-num">15+</span>
-                        <span class="stat-label" data-en="Years of Experience" data-pt="Anos de Experiência">Years of
-                            Experience</span>
-                    </div>
-                    <div class="stat-divider"></div>
-                    <div class="stat">
-                        <span class="stat-num">3</span>
-                        <span class="stat-label" data-en="Countries" data-pt="Países">Countries</span>
-                    </div>
-                    <div class="stat-divider"></div>
-                    <div class="stat">
-                        <span class="stat-num">5+</span>
-                        <span class="stat-label" data-en="Industries" data-pt="Setores">Industries</span>
-                    </div>
-                </div>
-            </div>
-            <div class="hero-photo-wrap fade-in delay-1">
-                <div class="hero-photo-ring">
-                    <img src="assets/profile.jpg" alt="Dellanio Alencar" class="hero-photo" />
-                </div>
-                <div class="photo-float-badge top-left">
-                    <span>☁️</span>
-                    <span data-en="Cloud &amp; DevOps" data-pt="Cloud &amp; DevOps">Cloud &amp; DevOps</span>
-                </div>
-                <div class="photo-float-badge bottom-right">
-                    <span>🤖</span>
-                    <span data-en="AI &amp; LLMs" data-pt="IA &amp; LLMs">AI &amp; LLMs</span>
-                </div>
             </div>
         </div>
-        <div class="hero-scroll-hint">
-            <span data-en="Scroll to explore" data-pt="Role para explorar">Scroll to explore</span>
-            <div class="scroll-arrow"></div>
-        </div>
-    </section>
-
-    <!-- ===== ABOUT ===== -->
-    <section class="section about" id="about">
-        <div class="container">
-            <div class="section-label" data-en="About Me" data-pt="Sobre Mim">About Me</div>
-            <div class="about-grid">
-                <div class="about-text fade-in">
-                    <h2 data-en="Engineering leader with a global track record."
-                        data-pt="Líder de engenharia com histórico global.">
-                        Engineering leader with a global track record.
-                    </h2>
-                    <p data-en="I'm an experienced professional in software engineering management and enterprise architecture, leading development and architecture teams in large-scale projects."
-                        data-pt="Sou um profissional experiente em gestão de engenharia de software e arquitetura corporativa, liderando times de desenvolvimento e arquitetura em projetos de grande porte.">
-                        I'm an experienced professional in software engineering management and enterprise architecture,
-                        leading development and architecture teams in large-scale projects.
-                    </p>
-                    <p data-en="As Corporate Architecture and Software Factory Manager, I've been responsible for defining standards, driving technological innovation, evolving critical systems, and aligning strategy with business units."
-                        data-pt="Como Gestor de Arquitetura Corporativa e Fábrica de Software, fui responsável pela definição de padrões, inovação tecnológica, evolução de sistemas críticos e alinhamento estratégico com as unidades de negócio.">
-                        As Corporate Architecture and Software Factory Manager, I've been responsible for defining
-                        standards, driving technological innovation, evolving critical systems, and aligning strategy
-                        with business units.
-                    </p>
-                    <p data-en="My international experience spans projects led in English with Huawei/China, and in Spanish for hospitals in Ecuador and Uruguay — giving me a truly cross-cultural leadership perspective."
-                        data-pt="Minha experiência internacional inclui projetos liderados em inglês com a Huawei/China, e em espanhol para hospitais no Equador e Uruguai — oferecendo uma perspectiva de liderança verdadeiramente intercultural.">
-                        My international experience spans projects led in English with Huawei/China, and in Spanish for
-                        hospitals in Ecuador and Uruguay — giving me a truly cross-cultural leadership perspective.
-                    </p>
-                </div>
-                <div class="about-industries fade-in delay-1">
-                    <p class="industries-label" data-en="Industries I've Served" data-pt="Setores em que Atuei">
-                        Industries I've Served</p>
-                    <div class="industry-tags">
-                        <span data-en="🏦 Banking" data-pt="🏦 Bancos">🏦 Banking</span>
-                        <span data-en="🏥 Hospitals" data-pt="🏥 Hospitais">🏥 Hospitals</span>
-                        <span data-en="🛡️ Insurance" data-pt="🛡️ Seguradoras">🛡️ Insurance</span>
-                        <span data-en="💊 Health Plans" data-pt="💊 Planos de Saúde">💊 Health Plans</span>
-                        <span data-en="💼 ERP / Finance" data-pt="💼 ERP / Financeiro">💼 ERP / Finance</span>
-                        <span data-en="🌐 International" data-pt="🌐 Internacional">🌐 International</span>
-                    </div>
-                    <div class="languages-box">
-                        <p class="industries-label" data-en="Languages" data-pt="Idiomas">Languages</p>
-                        <div class="lang-list">
-                            <div class="lang-item">
-                                <span class="flag">🇧🇷</span>
-                                <div>
-                                    <span class="lang-name" data-en="Portuguese" data-pt="Português">Portuguese</span>
-                                    <span class="lang-level" data-en="Native" data-pt="Nativo">Native</span>
-                                </div>
-                            </div>
-                            <div class="lang-item">
-                                <span class="flag">🇺🇸</span>
-                                <div>
-                                    <span class="lang-name" data-en="English" data-pt="Inglês">English</span>
-                                    <span class="lang-level" data-en="Fluent" data-pt="Fluente">Fluent</span>
-                                </div>
-                            </div>
-                            <div class="lang-item">
-                                <span class="flag">🇪🇸</span>
-                                <div>
-                                    <span class="lang-name" data-en="Spanish" data-pt="Espanhol">Spanish</span>
-                                    <span class="lang-level" data-en="Professional"
-                                        data-pt="Profissional">Professional</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+    </header>
+    <main id="main" tabindex="-1">
+        <section class="hero container" id="hero" aria-labelledby="hero-title">
+            <div class="hero-copy">
+                <p class="hero-role" data-pt="Gestão de engenharia & arquitetura de software" data-en="Engineering management & software architecture">Gestão de engenharia &amp; arquitetura de software</p>
+                <h1 id="hero-title">Dellanio<br>Alencar<span>.</span></h1>
+                <p class="hero-statement" data-pt="Engenharia com visão de negócio. Liderança próxima das pessoas." data-en="Engineering with business perspective. Leadership that puts people first.">Engenharia com visão de negócio. Liderança próxima das pessoas.</p>
+                <p class="hero-description" data-pt="Lidero times e decisões de arquitetura em ambientes onde o software faz parte da operação: bancos, hospitais e sistemas corporativos." data-en="I lead teams and architecture decisions where software is part of the operation: banks, hospitals, and enterprise systems.">Lidero times e decisões de arquitetura em ambientes onde o software faz parte da operação: bancos, hospitais e sistemas corporativos.</p>
+                <div class="hero-actions">
+                    <a class="button" href="#contact" data-pt="Vamos conversar" data-en="Let’s talk">Vamos conversar</a>
+                    <a class="text-link" href="https://www.linkedin.com/in/dellanio/" target="_blank" rel="noopener noreferrer">LinkedIn <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg></a>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- ===== SKILLS ===== -->
-    <section class="section skills" id="skills">
-        <div class="container">
-            <div class="section-label" data-en="Expertise" data-pt="Competências">Expertise</div>
-            <h2 class="section-title fade-in" data-en="What I bring to the table."
-                data-pt="O que eu trago para o time.">What I bring to the table.</h2>
-            <div class="skills-grid">
-
-                <div class="skill-card fade-in delay-1">
-                    <div class="skill-icon">🏗️</div>
-                    <h3 data-en="Software Architecture" data-pt="Arquitetura de Software">Software Architecture</h3>
-                    <p data-en="Designing scalable, secure, and maintainable enterprise solutions. Adoption of architectural standards and emerging technologies."
-                        data-pt="Desenvolvimento de soluções corporativas escaláveis, seguras e sustentáveis. Adoção de padrões arquiteturais e tecnologias emergentes.">
-                        Designing scalable, secure, and maintainable enterprise solutions. Adoption of architectural
-                        standards and emerging technologies.
-                    </p>
-                    <div class="skill-tags">
-                        <span>Spring
-                            Boot</span><span>Microservices</span><span>Java</span><span>React</span><span>Angular</span>
-                    </div>
-                </div>
-
-                <div class="skill-card fade-in delay-2">
-                    <div class="skill-icon">👥</div>
-                    <h3 data-en="Engineering Leadership" data-pt="Liderança de Engenharia">Engineering Leadership</h3>
-                    <p data-en="Managing cross-functional teams, conducting 1:1s, 360° evaluations, mentoring engineers, and promoting an agile culture."
-                        data-pt="Gestão de equipes multidisciplinares, 1:1s, avaliações 360°, mentoring e fomento à cultura ágil.">
-                        Managing cross-functional teams, conducting 1:1s, 360° evaluations, mentoring engineers, and
-                        promoting an agile culture.
-                    </p>
-                    <div class="skill-tags">
-                        <span>Scrum</span><span>Kanban</span><span>JIRA</span><span>Redmine</span><span>OKRs</span>
-                    </div>
-                </div>
-
-                <div class="skill-card fade-in delay-3">
-                    <div class="skill-icon">🚀</div>
-                    <h3 data-en="DevOps &amp; Continuous Delivery" data-pt="DevOps &amp; Entrega Contínua">DevOps &amp;
-                        Continuous Delivery</h3>
-                    <p data-en="CI/CD pipelines, automated testing, and quality gates to ensure fast, reliable, and high-quality software delivery."
-                        data-pt="Pipelines de CI/CD, testes automatizados e quality gates para garantir entregas rápidas, confiáveis e de alta qualidade.">
-                        CI/CD pipelines, automated testing, and quality gates to ensure fast, reliable, and high-quality
-                        software delivery.
-                    </p>
-                    <div class="skill-tags">
-                        <span>Jenkins</span><span>GitLab</span><span>ArgoCD</span><span>SonarQube</span><span>Selenium</span>
-                    </div>
-                </div>
-
-                <div class="skill-card fade-in delay-1">
-                    <div class="skill-icon">☁️</div>
-                    <h3 data-en="Cloud &amp; Infrastructure" data-pt="Cloud &amp; Infraestrutura">Cloud &amp;
-                        Infrastructure</h3>
-                    <p data-en="Multi-cloud experience running critical workloads in managed cloud environments and on-premise setups."
-                        data-pt="Experiência multi-cloud com workloads críticos em ambientes de nuvem gerenciada e on-premise.">
-                        Multi-cloud experience running critical workloads in managed cloud environments and on-premise
-                        setups.
-                    </p>
-                    <div class="skill-tags">
-                        <span>AWS</span><span>Oracle OCI</span><span>Huawei
-                            Cloud</span><span>JBoss</span><span>Tomcat</span>
-                    </div>
-                </div>
-
-                <div class="skill-card fade-in delay-2">
-                    <div class="skill-icon">🔗</div>
-                    <h3 data-en="Integrations &amp; Messaging" data-pt="Integrações &amp; Mensageria">Integrations &amp;
-                        Messaging</h3>
-                    <p data-en="Building robust event-driven and API-first systems for seamless integration between critical enterprise platforms."
-                        data-pt="Construção de sistemas orientados a eventos e APIs para integração robusta entre plataformas corporativas críticas.">
-                        Building robust event-driven and API-first systems for seamless integration between critical
-                        enterprise platforms.
-                    </p>
-                    <div class="skill-tags">
-                        <span>Apache
-                            Kafka</span><span>RabbitMQ</span><span>ActiveMQ</span><span>Keycloak</span><span>REST</span>
-                    </div>
-                </div>
-
-                <div class="skill-card fade-in delay-3">
-                    <div class="skill-icon">🤖</div>
-                    <h3 data-en="AI &amp; Generative Intelligence" data-pt="IA &amp; Inteligência Generativa">AI &amp;
-                        Generative Intelligence</h3>
-                    <p data-en="Implementing GenAI solutions for automation, transcription, and intelligent workflows in enterprise contexts."
-                        data-pt="Implementação de soluções GenAI para automação, transcrição e fluxos inteligentes em contextos corporativos.">
-                        Implementing GenAI solutions for automation, transcription, and intelligent workflows in
-                        enterprise contexts.
-                    </p>
-                    <div class="skill-tags">
-                        <span>LangChain</span><span>OpenAI / GPT</span><span>AWS
-                            Bedrock</span><span>Speech-to-Text</span>
-                    </div>
-                </div>
-
+            <figure class="portrait">
+                <div class="portrait-image"><img src="assets/profile.jpg" width="1024" height="1536" alt="Dellanio Alencar" fetchpriority="high"></div>
+                <figcaption><span data-pt="Base no Brasil. Perspectiva global." data-en="Based in Brazil. A global perspective.">Base no Brasil. Perspectiva global.</span><span class="portrait-mark" aria-hidden="true">da.</span></figcaption>
+            </figure>
+            <div class="hero-footnote">
+                <p><strong data-pt="Mais de 15 anos" data-en="Over 15 years">Mais de 15 anos</strong><span data-pt="entre tecnologia, pessoas e negócio." data-en="across technology, people, and business.">entre tecnologia, pessoas e negócio.</span></p>
+                <a href="#experience" class="explore-link"><span data-pt="Conheça minha trajetória" data-en="Explore my experience">Conheça minha trajetória</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16m-6-6 6 6 6-6"/></svg></a>
             </div>
-        </div>
-    </section>
-
-    <!-- ===== CONTACT ===== -->
-    <section class="section contact" id="contact">
-        <div class="container">
-            <div class="section-label" data-en="Get in Touch" data-pt="Contato">Get in Touch</div>
-            <h2 class="section-title fade-in" data-en="Let's work together." data-pt="Vamos trabalhar juntos.">Let's
-                work together.</h2>
-            <p class="contact-sub fade-in"
-                data-en="I'm open to Engineering Manager, VP of Engineering, and Director of Engineering opportunities. Feel free to reach out."
-                data-pt="Estou aberto a oportunidades como Engineering Manager, VP de Engenharia e Diretor de Engenharia. Fique à vontade para entrar em contato.">
-                I'm open to Engineering Manager, VP of Engineering, and Director of Engineering opportunities. Feel free
-                to reach out.
-            </p>
-            <div class="contact-cards fade-in delay-1">
-                <a href="mailto:contato@dellanio.com" class="contact-card">
-                    <div class="contact-icon">✉️</div>
-                    <div>
-                        <p class="contact-card-label" data-en="Email" data-pt="E-mail">Email</p>
-                        <p class="contact-card-value">contato@dellanio.com</p>
-                    </div>
-                </a>
-                <a href="https://wa.me/5581983352449" target="_blank" class="contact-card">
-                    <div class="contact-icon">📱</div>
-                    <div>
-                        <p class="contact-card-label" data-en="WhatsApp" data-pt="WhatsApp">WhatsApp</p>
-                        <p class="contact-card-value">+55 81 98335-2449</p>
-                    </div>
-                </a>
-                <a href="https://www.linkedin.com/in/dellanio/" target="_blank" class="contact-card">
-                    <div class="contact-icon">💼</div>
-                    <div>
-                        <p class="contact-card-label">LinkedIn</p>
-                        <p class="contact-card-value">linkedin.com/in/dellanio</p>
-                    </div>
-                </a>
+        </section>
+        <section class="about section container" id="about" aria-labelledby="about-title">
+            <div class="section-intro">
+                <p class="section-caption" data-pt="Sobre mim" data-en="About me">Sobre mim</p>
+                <h2 id="about-title" data-pt="Da decisão técnica à construção do time." data-en="From technical decisions to building the team.">Da decisão técnica à construção do time.</h2>
             </div>
-        </div>
-    </section>
-
-    <!-- ===== FOOTER ===== -->
-    <footer class="footer">
-        <div class="container">
-            <span>© 2025 Dellanio Alencar</span>
-            <span data-en="Crafted with care." data-pt="Feito com cuidado.">Crafted with care.</span>
-        </div>
-    </footer>
-
-    <script src="script.js"></script>
+            <div class="about-copy">
+                <p class="lead" data-pt="Minha trajetória conecta engenharia de software, arquitetura corporativa e gestão de pessoas." data-en="My work brings together software engineering, enterprise architecture, and people management.">Minha trajetória conecta engenharia de software, arquitetura corporativa e gestão de pessoas.</p>
+                <p data-pt="Como gestor de Arquitetura Corporativa e Fábrica de Software, atuei na definição de padrões, na evolução de sistemas críticos e no alinhamento das decisões de tecnologia com as unidades de negócio." data-en="As Corporate Architecture and Software Factory Manager, I have defined standards, evolved critical systems, and aligned technology decisions with business units.">Como gestor de Arquitetura Corporativa e Fábrica de Software, atuei na definição de padrões, na evolução de sistemas críticos e no alinhamento das decisões de tecnologia com as unidades de negócio.</p>
+                <p data-pt="No dia a dia, essa atuação passa por conversas de desenvolvimento, mentoria, planejamento e decisões de arquitetura. Gosto de estar perto das pessoas e dos problemas que estamos resolvendo." data-en="Day to day, that means development conversations, mentoring, planning, and architecture decisions. I like staying close to the people and the problems we are working on.">No dia a dia, essa atuação passa por conversas de desenvolvimento, mentoria, planejamento e decisões de arquitetura. Gosto de estar perto das pessoas e dos problemas que estamos resolvendo.</p>
+                <div class="industry-note"><span data-pt="Contextos de atuação" data-en="Industry experience">Contextos de atuação</span><p data-pt="Bancos, hospitais, seguradoras, planos de saúde e ERP financeiro." data-en="Banking, hospitals, insurance, health plans, and financial ERP.">Bancos, hospitais, seguradoras, planos de saúde e ERP financeiro.</p></div>
+            </div>
+        </section>
+        <section class="experience" id="experience" aria-labelledby="experience-title">
+            <div class="container experience-inner">
+                <div class="experience-heading">
+                    <p class="section-caption" data-pt="Experiência internacional" data-en="International experience">Experiência internacional</p>
+                    <h2 id="experience-title" data-pt="Outros contextos. Novas perspectivas." data-en="Different contexts. New perspectives.">Outros contextos. Novas perspectivas.</h2>
+                    <p data-pt="Trabalhar entre países também é aprender a ouvir, adaptar a comunicação e construir entendimento entre times." data-en="Working across countries also means learning to listen, adapt communication, and build a shared understanding across teams.">Trabalhar entre países também é aprender a ouvir, adaptar a comunicação e construir entendimento entre times.</p>
+                </div>
+                <div class="experience-list">
+                    <article class="experience-item">
+                        <div class="place"><h3 data-pt="Brasil" data-en="Brazil">Brasil</h3><span data-pt="Gestão & arquitetura" data-en="Management & architecture">Gestão &amp; arquitetura</span></div>
+                        <p data-pt="Liderança de desenvolvimento e arquitetura em projetos de grande porte nos setores financeiro, de saúde e de gestão empresarial." data-en="Development and architecture leadership on large-scale projects in finance, healthcare, and enterprise management.">Liderança de desenvolvimento e arquitetura em projetos de grande porte nos setores financeiro, de saúde e de gestão empresarial.</p>
+                    </article>
+                    <article class="experience-item">
+                        <div class="place"><h3 data-pt="China" data-en="China">China</h3><span>Huawei</span></div>
+                        <p data-pt="Projetos com a Huawei, conduzidos em inglês, conectando decisões técnicas e colaboração entre equipes de diferentes culturas." data-en="Projects with Huawei, conducted in English, connecting technical decisions with collaboration across different cultures.">Projetos com a Huawei, conduzidos em inglês, conectando decisões técnicas e colaboração entre equipes de diferentes culturas.</p>
+                    </article>
+                    <article class="experience-item">
+                        <div class="place"><h3 data-pt="Equador & Uruguai" data-en="Ecuador & Uruguay">Equador &amp; Uruguai</h3><span data-pt="Tecnologia para a saúde" data-en="Healthcare technology">Tecnologia para a saúde</span></div>
+                        <p data-pt="Projetos para hospitais, liderados em espanhol, com atenção às necessidades de sistemas que apoiam a operação hospitalar." data-en="Hospital projects led in Spanish, addressing the needs of systems that support hospital operations.">Projetos para hospitais, liderados em espanhol, com atenção às necessidades de sistemas que apoiam a operação hospitalar.</p>
+                    </article>
+                </div>
+                <dl class="languages">
+                    <div><dt data-pt="Português" data-en="Portuguese">Português</dt><dd data-pt="Nativo" data-en="Native">Nativo</dd></div>
+                    <div><dt data-pt="Inglês" data-en="English">Inglês</dt><dd data-pt="Fluente" data-en="Fluent">Fluente</dd></div>
+                    <div><dt data-pt="Espanhol" data-en="Spanish">Espanhol</dt><dd data-pt="Profissional" data-en="Professional">Profissional</dd></div>
+                </dl>
+            </div>
+        </section>
+        <section class="expertise section container" id="skills" aria-labelledby="expertise-title">
+            <div class="section-intro">
+                <p class="section-caption" data-pt="Como atuo" data-en="How I work">Como atuo</p>
+                <h2 id="expertise-title" data-pt="Visão do todo. Cuidado com a execução." data-en="The bigger picture. Care in the execution.">Visão do todo. Cuidado com a execução.</h2>
+                <p data-pt="Experiência de gestão apoiada por uma base técnica que continua presente nas decisões." data-en="Management experience grounded in technical knowledge that continues to inform my decisions.">Experiência de gestão apoiada por uma base técnica que continua presente nas decisões.</p>
+            </div>
+            <div class="expertise-list">
+                <details open>
+                    <summary><h3 data-pt="Liderança de engenharia" data-en="Engineering leadership">Liderança de engenharia</h3><span class="expand-icon" aria-hidden="true"></span></summary>
+                    <div class="expertise-body"><p data-pt="Gestão de equipes multidisciplinares, conversas 1:1, avaliações 360° e mentoria. Organização da entrega com práticas ágeis e alinhamento de objetivos." data-en="Leading cross-functional teams, one-to-ones, 360° reviews, and mentoring. Organizing delivery through agile practices and shared goals.">Gestão de equipes multidisciplinares, conversas 1:1, avaliações 360° e mentoria. Organização da entrega com práticas ágeis e alinhamento de objetivos.</p><p class="technical-note">Scrum, Kanban, OKRs, Jira</p></div>
+                </details>
+                <details>
+                    <summary><h3 data-pt="Arquitetura & integrações" data-en="Architecture & integrations">Arquitetura &amp; integrações</h3><span class="expand-icon" aria-hidden="true"></span></summary>
+                    <div class="expertise-body"><p data-pt="Definição de padrões e evolução de sistemas corporativos. APIs, microsserviços e mensageria para conectar plataformas com segurança e capacidade de evolução." data-en="Defining standards and evolving enterprise systems. APIs, microservices, and messaging to connect platforms securely and support their evolution.">Definição de padrões e evolução de sistemas corporativos. APIs, microsserviços e mensageria para conectar plataformas com segurança e capacidade de evolução.</p><p class="technical-note">Java, Spring Boot, React, Angular, Kafka, RabbitMQ, ActiveMQ, Keycloak</p></div>
+                </details>
+                <details>
+                    <summary><h3 data-pt="Cloud & entrega contínua" data-en="Cloud & continuous delivery">Cloud &amp; entrega contínua</h3><span class="expand-icon" aria-hidden="true"></span></summary>
+                    <div class="expertise-body"><p data-pt="Workloads críticos em nuvem e on-premise. Pipelines de CI/CD, testes automatizados e critérios de qualidade para dar consistência à entrega de software." data-en="Critical workloads in cloud and on-premise environments. CI/CD pipelines, automated testing, and quality gates to make software delivery consistent.">Workloads críticos em nuvem e on-premise. Pipelines de CI/CD, testes automatizados e critérios de qualidade para dar consistência à entrega de software.</p><p class="technical-note">AWS, Oracle OCI, Huawei Cloud, Jenkins, GitLab, ArgoCD, SonarQube</p></div>
+                </details>
+                <details>
+                    <summary><h3 data-pt="Inteligência artificial aplicada" data-en="Applied artificial intelligence">Inteligência artificial aplicada</h3><span class="expand-icon" aria-hidden="true"></span></summary>
+                    <div class="expertise-body"><p data-pt="Aplicação de IA generativa em automação, transcrição e fluxos de trabalho corporativos, conectando as possibilidades da tecnologia a necessidades concretas." data-en="Applying generative AI to automation, transcription, and enterprise workflows, connecting the technology’s possibilities with concrete needs.">Aplicação de IA generativa em automação, transcrição e fluxos de trabalho corporativos, conectando as possibilidades da tecnologia a necessidades concretas.</p><p class="technical-note">LangChain, OpenAI, AWS Bedrock, Speech-to-Text</p></div>
+                </details>
+            </div>
+        </section>
+        <section class="contact" id="contact" aria-labelledby="contact-title">
+            <div class="container contact-inner">
+                <div class="contact-heading">
+                    <p class="availability"><span aria-hidden="true"></span><span data-pt="Aberto a novas oportunidades" data-en="Open to new opportunities">Aberto a novas oportunidades</span></p>
+                    <h2 id="contact-title" data-pt="Uma boa conversa é um começo." data-en="A good conversation is a beginning.">Uma boa conversa é um começo.</h2>
+                    <p data-pt="Vamos falar sobre pessoas, tecnologia e o próximo desafio da sua engenharia. Estou aberto a posições de Engineering Manager, Diretor e VP de Engenharia." data-en="Let’s talk about people, technology, and your next engineering challenge. I’m open to Engineering Manager, Director, and VP of Engineering roles.">Vamos falar sobre pessoas, tecnologia e o próximo desafio da sua engenharia. Estou aberto a posições de Engineering Manager, Diretor e VP de Engenharia.</p>
+                </div>
+                <div class="contact-links">
+                    <a class="email-link" href="mailto:contato@dellanio.com">contato@dellanio.com<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></a>
+                    <div class="contact-other"><a class="text-link" href="https://www.linkedin.com/in/dellanio/" target="_blank" rel="noopener noreferrer">LinkedIn <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg></a><a class="text-link" href="https://wa.me/5581983352449" target="_blank" rel="noopener noreferrer">WhatsApp <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg></a></div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="container site-footer"><span>© <span id="year">2026</span> Dellanio Alencar</span><a href="#hero" data-pt="De volta ao início" data-en="Back to top">De volta ao início</a></footer>
 </body>
-
 </html>

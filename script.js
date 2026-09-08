@@ -1,87 +1,92 @@
-// ===== Language Toggle =====
-let currentLang = 'en';
+(() => {
+    'use strict';
 
-const langToggleBtn = document.getElementById('langToggle');
-const langLabel = document.getElementById('langLabel');
-const langAlt = document.getElementById('langAlt');
+    const root = document.documentElement;
+    const navigation = document.getElementById('navigation');
+    const menuButton = document.querySelector('.menu-toggle');
+    const languageSwitch = document.querySelector('.language-switch');
+    const mobile = window.matchMedia('(max-width: 760px)');
+    const translated = document.querySelectorAll('[data-pt][data-en]');
+    const labels = document.querySelectorAll('[data-pt-label][data-en-label]');
+    let language = 'pt';
 
-function applyLanguage(lang) {
-    currentLang = lang;
-    const attr = lang === 'en' ? 'data-en' : 'data-pt';
+    const metadata = {
+        pt: {
+            title: 'Dellanio Alencar — Liderança de engenharia',
+            description: 'Dellanio Alencar. Gestão de engenharia e arquitetura de software, com mais de 15 anos de experiência e atuação internacional em bancos, saúde e sistemas corporativos.',
+            social: 'Engenharia com visão de negócio. Liderança próxima das pessoas.',
+            open: 'Abrir menu', close: 'Fechar menu'
+        },
+        en: {
+            title: 'Dellanio Alencar — Engineering leadership',
+            description: 'Dellanio Alencar. Engineering management and software architecture, with over 15 years of experience and international projects in banking, healthcare, and enterprise systems.',
+            social: 'Engineering with business perspective. Leadership that puts people first.',
+            open: 'Open menu', close: 'Close menu'
+        }
+    };
 
-    document.querySelectorAll('[data-en]').forEach(el => {
-        const text = el.getAttribute(attr);
-        if (text) el.innerHTML = text;
-    });
-
-    // Update nav lang display
-    if (lang === 'en') {
-        langLabel.textContent = 'EN';
-        langAlt.textContent = 'PT';
-    } else {
-        langLabel.textContent = 'PT';
-        langAlt.textContent = 'EN';
+    function updateMenuLabel() {
+        menuButton.setAttribute('aria-label', metadata[language][menuButton.getAttribute('aria-expanded') === 'true' ? 'close' : 'open']);
     }
 
-    document.documentElement.lang = lang === 'en' ? 'en' : 'pt-BR';
-}
-
-langToggleBtn.addEventListener('click', () => {
-    applyLanguage(currentLang === 'en' ? 'pt' : 'en');
-});
-
-// ===== Sticky Nav =====
-const nav = document.getElementById('nav');
-
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 40) {
-        nav.classList.add('scrolled');
-    } else {
-        nav.classList.remove('scrolled');
+    function setMenu(open) {
+        navigation.classList.toggle('is-open', open);
+        menuButton.setAttribute('aria-expanded', String(open));
+        updateMenuLabel();
     }
-}, { passive: true });
 
-// ===== Hamburger menu =====
-const hamburger = document.getElementById('hamburger');
-const mobileMenu = document.getElementById('mobileMenu');
+    function applyLanguage(next, persist = false) {
+        language = next === 'en' ? 'en' : 'pt';
+        root.lang = language === 'pt' ? 'pt-BR' : 'en';
+        translated.forEach(element => { element.textContent = element.dataset[language]; });
+        labels.forEach(element => { element.setAttribute('aria-label', element.getAttribute('data-' + language + '-label')); });
+        languageSwitch.querySelectorAll('button').forEach(button => {
+            button.setAttribute('aria-pressed', String(button.dataset.language === language));
+        });
+        document.title = metadata[language].title;
+        document.querySelector('meta[name="description"]').content = metadata[language].description;
+        document.querySelector('meta[property="og:title"]').content = metadata[language].title;
+        document.querySelector('meta[property="og:description"]').content = metadata[language].social;
+        document.querySelector('meta[property="og:locale"]').content = language === 'pt' ? 'pt_BR' : 'en_US';
+        updateMenuLabel();
+        if (persist) {
+            try { localStorage.setItem('dellanio-language', language); } catch { /* Navigation remains usable without storage. */ }
+        }
+    }
 
-hamburger.addEventListener('click', () => {
-    mobileMenu.classList.toggle('open');
-});
+    let preferred;
+    try { preferred = localStorage.getItem('dellanio-language'); } catch { /* Use browser language when storage is unavailable. */ }
+    if (preferred !== 'pt' && preferred !== 'en') {
+        preferred = (navigator.language || 'pt').toLowerCase().startsWith('en') ? 'en' : 'pt';
+    }
+    applyLanguage(preferred);
+    root.classList.add('js');
+    languageSwitch.hidden = false;
+    menuButton.hidden = false;
 
-// Close mobile menu when clicking a link
-mobileMenu.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => mobileMenu.classList.remove('open'));
-});
-
-// ===== Fade-in on scroll =====
-const fadeEls = document.querySelectorAll('.fade-in');
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            observer.unobserve(entry.target);
+    languageSwitch.querySelectorAll('button').forEach(button => {
+        button.addEventListener('click', () => applyLanguage(button.dataset.language, true));
+    });
+    menuButton.addEventListener('click', () => setMenu(menuButton.getAttribute('aria-expanded') !== 'true'));
+    navigation.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            setMenu(false);
+            if (mobile.matches) {
+                const section = document.querySelector(link.getAttribute('href'));
+                section.tabIndex = -1;
+                section.focus({ preventScroll: true });
+            }
+        });
+    });
+    document.addEventListener('keydown', event => {
+        if (event.key === 'Escape' && menuButton.getAttribute('aria-expanded') === 'true') {
+            setMenu(false);
+            menuButton.focus();
         }
     });
-}, { threshold: 0.12 });
-
-fadeEls.forEach(el => observer.observe(el));
-
-// ===== Smooth active nav link highlighting =====
-const sections = document.querySelectorAll('section[id]');
-const navLinks = document.querySelectorAll('.nav-links a');
-
-window.addEventListener('scroll', () => {
-    let current = '';
-    sections.forEach(sec => {
-        if (window.scrollY >= sec.offsetTop - 120) {
-            current = sec.id;
-        }
+    document.addEventListener('click', event => {
+        if (!event.target.closest('.header-inner')) setMenu(false);
     });
-    navLinks.forEach(link => {
-        link.style.color = link.getAttribute('href') === `#${current}`
-            ? 'var(--accent)'
-            : '';
-    });
-}, { passive: true });
+    mobile.addEventListener('change', () => setMenu(false));
+    document.getElementById('year').textContent = String(new Date().getFullYear());
+})();
