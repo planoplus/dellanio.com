@@ -1,34 +1,42 @@
-# Site pessoal: direção e manutenção
-
-HTML, CSS e JavaScript, sem etapa de build ou dependências de execução.
-
-## Prévia local
-
-Com Node.js instalado, execute `node scripts/preview.cjs` e abra <http://127.0.0.1:4173>. O servidor local expõe apenas os arquivos públicos do site. Para encerrar, use Ctrl+C.
-
-## Conteúdo e idiomas
-
-- `index.html`: conteúdo em português e traduções nos atributos `data-pt` e `data-en`.
-- `style.css`: identidade visual e layouts responsivos.
-- `script.js`: preferência de idioma, metadados, menu móvel e ano do rodapé.
-- `assets/profile.jpg`: fotografia original; o tratamento de cor é aplicado pelo CSS.
-
-O idioma inicial acompanha o navegador (inglês para navegadores em inglês; português nos demais casos). Uma escolha explícita de idioma é lembrada localmente. Sem JavaScript, o conteúdo em português, a navegação, os contatos e os detalhes de atuação continuam disponíveis.
+# Portfólio 2.0
 
 ## Direção visual
 
-Referência de apoio: `coding/prompting_for_frontend_aesthetics.ipynb`, em `D:\projetos\IA\claude-cookbooks-main`, e a skill local `frontend-design`.
+Conceito: engenharia como conexão entre pessoas, decisões e execução. O elemento principal é uma escultura digital desenhada em canvas, que muda entre rede, camadas de arquitetura e fluxo de entrega conforme a rolagem. O movimento responde à navegação e ao ponteiro; a leitura e o controle da página permanecem nativos.
 
-A composição privilegia nome, retrato e atuação em liderança de engenharia. Newsreader nos títulos e IBM Plex Sans nos textos; papel `#f5f5ef`, texto `#23372e`, verde `#243e33`, texto secundário `#5b665e` e sálvia `#e5eadd`. A experiência internacional ocupa uma seção própria; ferramentas ficam nos detalhes expansíveis das áreas de atuação.
+Paleta: fundo #080c14, superfície #101925, texto #eef3fa, texto secundário #9baac0, ciano #83d9ed e âmbar #e7bd83. Sora nos títulos e no texto; IBM Plex Mono nas legendas técnicas. Alinhamento predominante à esquerda, com composição assimétrica.
 
-As fontes são carregadas pelo Google Fonts, com alternativas locais em caso de indisponibilidade. O site respeita a preferência por movimento reduzido. Os relatos usam o conteúdo preexistente, sem acrescentar empregadores, datas ou métricas de resultados.
+Estrutura:
+```
+marca                 navegação / idioma / efeitos
+apresentação e nome   escultura digital interativa
+perfil + retrato      experiência e contexto
+escultura fixa        pessoas → arquitetura → entrega
+presença internacional / países selecionáveis
+contato em escala grande
+```
 
-## Publicação
+Revisão do conceito: os efeitos mostram as áreas de atuação do Dellanio. Para manter uma identidade pessoal, o retrato e a experiência real aparecem junto da narrativa; o visual não simula métricas, terminais ou projetos inexistentes. A referência ao cookbook da versão 1.0 foi descartada.
 
-Os arquivos públicos são `index.html`, `style.css`, `script.js`, `assets/profile.jpg` e `assets/favicon.svg`. A configuração existente de nginx/Docker foi preservada. O servidor em `scripts/preview.cjs` serve apenas para desenvolvimento local.
+## Execução local
 
-## Validação do redesign
+Execute `node scripts/preview.cjs` e abra <http://127.0.0.1:4173>. O servidor de prévia só expõe os arquivos públicos do site. Nenhuma instalação de pacote é necessária.
 
-Conferido no Chrome em português e inglês nas larguras de 320, 375, 390, 760, 768, 1024 e 1440 pixels, sem overflow horizontal. Verificados troca e persistência de idioma, menu com Escape e retorno de foco, detalhes expansíveis por teclado, âncoras, contatos, acesso sem JavaScript e armazenamento local indisponível.
+## Manutenção
 
-A auditoria axe dos critérios WCAG 2 A/AA e WCAG 2.1 AA não encontrou violações nos estados desktop e mobile em português testados. Essa checagem automática complementa a inspeção visual; não equivale a uma certificação de acessibilidade.
+- `index.html`: conteúdo e traduções por atributos `data-pt` e `data-en`.
+- `style.css`: identidade, responsividade e efeitos CSS.
+- `script.js`: idioma, navegação, escultura canvas, efeitos de rolagem e seleção de experiências.
+- `assets/profile.jpg`: retrato original, com tratamento apenas em CSS.
+
+As interações respeitam movimento reduzido e podem ser desativadas pelo controle de efeitos. Conteúdo, contatos e navegação permanecem disponíveis sem JavaScript. As fontes vêm do Google Fonts, com fallback local. A trajetória se baseia no conteúdo original, sem inventar resultados ou datas.
+
+Os arquivos de nginx e Docker não fazem parte do redesign. A versão 1.0 está registrada no histórico Git.
+
+## Validação
+
+Conferido no Chrome em português e inglês nas larguras de 320, 375, 390, 580, 760, 800, 810, 1024, 1280 e 1440 pixels, sem transbordamento horizontal. Verificados os três estados do canvas, sua posição fixa durante a leitura, navegação móvel com Escape e foco, seleção dos quatro países, persistência das preferências e funcionamento sem JavaScript ou armazenamento local.
+
+Os efeitos foram verificados com movimento normal e reduzido: entrada finita, resposta ao ponteiro, quadros intermediários durante as transformações e interrupção dos efeitos pelo botão. O canvas não mantém um ciclo de desenho quando a página está ociosa.
+
+A auditoria axe dos critérios WCAG 2 A/AA e WCAG 2.1 AA não encontrou violações nos estados desktop em português e inglês e na narrativa móvel em português. A revisão automática foi complementada por capturas e inspeção visual; não equivale a uma certificação de acessibilidade.
