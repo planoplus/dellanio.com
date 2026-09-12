@@ -23,7 +23,6 @@
     let pointerY = 0;
     let pointerCurrentX = 0;
     let pointerCurrentY = 0;
-    let heroScroll = 0;
     let mediumPosts = null;
 
     const copy = {
@@ -268,7 +267,7 @@
         ctx.clearRect(0, 0, w, h);
         const base = Math.floor(Math.min(scene, 1.9999));
         const blend = scene >= 2 ? 1 : scene - base;
-        const scale = Math.min(w, h) * (visual.canvas.id === 'hero-canvas' ? .39 : .34);
+        const scale = Math.min(w, h) * (visual.canvas.id === 'hero-canvas' ? .35 : .34);
         const cy = Math.cos(rotation), sy = Math.sin(rotation), cx = Math.cos(tilt), sx = Math.sin(tilt);
         const projected = points.map(sets => {
             const a = sets[base], b = sets[base + 1];
@@ -335,15 +334,17 @@
         root.style.setProperty('--reading', String(pageHeight > 0 ? clamp(scrollY / pageHeight, 0, 1) : 0));
         const bandProgress = clamp((viewport - bandRect.top) / (viewport + bandRect.height), 0, 1);
         document.querySelector('.perspective-type').style.setProperty('--band-shift', effects ? (-3 - bandProgress * 15) + '%' : '-8%');
-        heroScroll = effects ? clamp(-heroRect.top / Math.max(heroRect.height, 1), 0, 1) : 0;
+        const aboutEl = document.getElementById('about');
+        const aboutRect = aboutEl ? aboutEl.getBoundingClientRect() : heroRect;
+        const globeScroll = effects ? clamp((viewport - aboutRect.top) / (viewport + aboutRect.height), 0, 1) : 0;
         const smoothing = effects ? 1 - Math.pow(.86, elapsed) : 1;
         sceneValue = mix(sceneValue, sceneTarget, smoothing);
         pointerCurrentX = mix(pointerCurrentX, effects ? pointerX : 0, smoothing);
         pointerCurrentY = mix(pointerCurrentY, effects ? pointerY : 0, smoothing);
         const intro = effects ? clamp((now - started) / 1400, 0, 1) : 1;
         for (const visual of visuals) {
-            const isHero = visual.canvas.id === 'hero-canvas';
-            draw(visual, isHero ? 0 : sceneValue, (isHero ? .4 + heroScroll * 2 + (1 - intro) * .6 : -.4 + sceneValue * .35) + pointerCurrentX * .16, .25 + pointerCurrentY * .1);
+            const isGlobe = visual.canvas.id === 'hero-canvas';
+            draw(visual, isGlobe ? 0 : sceneValue, (isGlobe ? .4 + globeScroll * 2.2 + (1 - intro) * .6 : -.4 + sceneValue * .35) + pointerCurrentX * .16, .25 + pointerCurrentY * .1);
         }
         const moving = Math.abs(sceneValue - sceneTarget) > .001 || Math.abs(pointerCurrentX - (effects ? pointerX : 0)) > .001 || Math.abs(pointerCurrentY - (effects ? pointerY : 0)) > .001;
         if (effects && (moving || intro < 1)) requestFrame();
@@ -366,7 +367,7 @@
     }, { rootMargin: '80px' });
     visuals.forEach(visual => visibilityObserver.observe(visual.canvas));
 
-    document.querySelectorAll('.hero-art, .system-frame').forEach(surface => {
+    document.querySelectorAll('.about-art, .system-frame').forEach(surface => {
         surface.addEventListener('pointermove', event => {
             if (!effects || event.pointerType === 'touch') return;
             const rect = surface.getBoundingClientRect();
