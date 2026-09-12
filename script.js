@@ -23,7 +23,7 @@
     let pointerY = 0;
     let pointerCurrentX = 0;
     let pointerCurrentY = 0;
-    let heroScroll = 0;
+    let mediumPosts = null;
 
     const copy = {
         pt: {
@@ -82,6 +82,7 @@
         document.querySelector('meta[property="og:locale"]').content = language === 'pt' ? 'pt_BR' : 'en_US';
         updateControlLabels();
         setStage(currentStage);
+        if (mediumPosts) renderMediumArticles(mediumPosts);
         if (persist) saveStorage('dellanio-language', language);
     }
 
@@ -122,6 +123,95 @@
     document.querySelector('.country-controls').hidden = false;
     selectCountry('br');
     countryButtons.forEach(button => button.addEventListener('click', () => selectCountry(button.dataset.country)));
+
+    // Medium integration for @dellanio
+    const MEDIUM_USER = 'dellanio';
+    const MEDIUM_FEED_API = 'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(`https://medium.com/feed/@${MEDIUM_USER}`);
+
+    function stripHtml(html, maxLength = 175) {
+        const doc = new DOMParser().parseFromString(html, 'text/html');
+        const text = (doc.body.textContent || '').replace(/\s+/g, ' ').trim();
+        if (text.length <= maxLength) return text;
+        return text.slice(0, maxLength).replace(/[,.;:!\s]+$/, '') + '…';
+    }
+
+    function formatPubDate(rawDate, targetLang) {
+        try {
+            const date = new Date(rawDate.replace(' ', 'T') + (rawDate.includes('Z') ? '' : 'Z'));
+            if (isNaN(date.getTime())) return rawDate;
+            const options = { day: '2-digit', month: 'short', year: 'numeric' };
+            return date.toLocaleDateString(targetLang === 'pt' ? 'pt-BR' : 'en-US', options).toLowerCase();
+        } catch {
+            return rawDate;
+        }
+    }
+
+    function renderMediumArticles(items) {
+        const container = document.getElementById('articles-list');
+        if (!container || !Array.isArray(items) || items.length === 0) return;
+
+        const latest = items.slice(0, 2);
+        container.innerHTML = latest.map(item => {
+            const title = item.title ? item.title.trim() : '';
+            const link = item.link || `https://medium.com/@${MEDIUM_USER}`;
+            const ptDate = formatPubDate(item.pubDate, 'pt');
+            const enDate = formatPubDate(item.pubDate, 'en');
+            const currentDate = language === 'pt' ? ptDate : enDate;
+            const snippet = item.snippet || stripHtml(item.description || item.content || '');
+            const iso = item.pubDate ? item.pubDate.split(' ')[0].split('T')[0] : '';
+            const ctaPt = 'Ler artigo completo';
+            const ctaEn = 'Read full article';
+            const ctaText = language === 'pt' ? ctaPt : ctaEn;
+
+            return `
+                <article class="article-card">
+                    <a class="article-card-link" href="${link}" target="_blank" rel="noopener noreferrer" aria-label="${title} (Medium)" data-pt-label="${title} (abre no Medium)" data-en-label="${title} (opens on Medium)">
+                        <div class="article-meta">
+                            <span class="article-source">Medium</span>
+                            <span class="article-separator" aria-hidden="true">•</span>
+                            <time class="article-date" datetime="${iso}" data-pt="${ptDate}" data-en="${enDate}">${currentDate}</time>
+                        </div>
+                        <h3 class="article-title">${title}</h3>
+                        <p class="article-snippet">${snippet}</p>
+                        <div class="article-action-row">
+                            <span class="article-cta">
+                                <span data-pt="${ctaPt}" data-en="${ctaEn}">${ctaText}</span>
+                                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+                            </span>
+                        </div>
+                    </a>
+                </article>
+            `;
+        }).join('');
+    }
+
+    async function loadMediumArticles() {
+        try {
+            const localRes = await fetch('assets/articles.json');
+            if (localRes.ok) {
+                const localData = await localRes.json();
+                if (Array.isArray(localData) && localData.length > 0) {
+                    mediumPosts = localData;
+                    renderMediumArticles(mediumPosts);
+                    return;
+                }
+            }
+        } catch { /* Continue to remote feed */ }
+
+        try {
+            const res = await fetch(MEDIUM_FEED_API);
+            if (!res.ok) return;
+            const data = await res.json();
+            if (data.status === 'ok' && Array.isArray(data.items) && data.items.length > 0) {
+                mediumPosts = data.items;
+                renderMediumArticles(mediumPosts);
+            }
+        } catch {
+            // Pre-rendered HTML cards in index.html remain intact
+        }
+    }
+
+    loadMediumArticles();
 
     // Three matching point sets let the same structure transform with the story.
     const count = 240;
@@ -177,7 +267,7 @@
         ctx.clearRect(0, 0, w, h);
         const base = Math.floor(Math.min(scene, 1.9999));
         const blend = scene >= 2 ? 1 : scene - base;
-        const scale = Math.min(w, h) * (visual.canvas.id === 'hero-canvas' ? .39 : .34);
+        const scale = Math.min(w, h) * (visual.canvas.id === 'hero-canvas' ? .35 : .34);
         const cy = Math.cos(rotation), sy = Math.sin(rotation), cx = Math.cos(tilt), sx = Math.sin(tilt);
         const projected = points.map(sets => {
             const a = sets[base], b = sets[base + 1];
@@ -244,15 +334,17 @@
         root.style.setProperty('--reading', String(pageHeight > 0 ? clamp(scrollY / pageHeight, 0, 1) : 0));
         const bandProgress = clamp((viewport - bandRect.top) / (viewport + bandRect.height), 0, 1);
         document.querySelector('.perspective-type').style.setProperty('--band-shift', effects ? (-3 - bandProgress * 15) + '%' : '-8%');
-        heroScroll = effects ? clamp(-heroRect.top / Math.max(heroRect.height, 1), 0, 1) : 0;
+        const aboutEl = document.getElementById('about');
+        const aboutRect = aboutEl ? aboutEl.getBoundingClientRect() : heroRect;
+        const globeScroll = effects ? clamp((viewport - aboutRect.top) / (viewport + aboutRect.height), 0, 1) : 0;
         const smoothing = effects ? 1 - Math.pow(.86, elapsed) : 1;
         sceneValue = mix(sceneValue, sceneTarget, smoothing);
         pointerCurrentX = mix(pointerCurrentX, effects ? pointerX : 0, smoothing);
         pointerCurrentY = mix(pointerCurrentY, effects ? pointerY : 0, smoothing);
         const intro = effects ? clamp((now - started) / 1400, 0, 1) : 1;
         for (const visual of visuals) {
-            const isHero = visual.canvas.id === 'hero-canvas';
-            draw(visual, isHero ? 0 : sceneValue, (isHero ? .4 + heroScroll * 2 + (1 - intro) * .6 : -.4 + sceneValue * .35) + pointerCurrentX * .16, .25 + pointerCurrentY * .1);
+            const isGlobe = visual.canvas.id === 'hero-canvas';
+            draw(visual, isGlobe ? 0 : sceneValue, (isGlobe ? .4 + globeScroll * 2.2 + (1 - intro) * .6 : -.4 + sceneValue * .35) + pointerCurrentX * .16, .25 + pointerCurrentY * .1);
         }
         const moving = Math.abs(sceneValue - sceneTarget) > .001 || Math.abs(pointerCurrentX - (effects ? pointerX : 0)) > .001 || Math.abs(pointerCurrentY - (effects ? pointerY : 0)) > .001;
         if (effects && (moving || intro < 1)) requestFrame();
@@ -275,7 +367,7 @@
     }, { rootMargin: '80px' });
     visuals.forEach(visual => visibilityObserver.observe(visual.canvas));
 
-    document.querySelectorAll('.hero-art, .system-frame').forEach(surface => {
+    document.querySelectorAll('.about-art, .system-frame').forEach(surface => {
         surface.addEventListener('pointermove', event => {
             if (!effects || event.pointerType === 'touch') return;
             const rect = surface.getBoundingClientRect();
