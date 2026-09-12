@@ -10,7 +10,8 @@ const routes = new Map([
     ['/style.css', ['style.css', 'text/css; charset=utf-8']],
     ['/script.js', ['script.js', 'text/javascript; charset=utf-8']],
     ['/assets/profile.jpg', ['assets/profile.jpg', 'image/jpeg']],
-    ['/assets/favicon.svg', ['assets/favicon.svg', 'image/svg+xml']]
+    ['/assets/favicon.svg', ['assets/favicon.svg', 'image/svg+xml']],
+    ['/assets/articles.json', ['assets/articles.json', 'application/json; charset=utf-8']]
 ]);
 
 const server = http.createServer((request, response) => {
